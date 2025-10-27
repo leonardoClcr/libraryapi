@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest
@@ -98,7 +97,7 @@ class LivroRepositoryTest {
 
     @Test
     void deletarLivroTest(){
-        UUID idLivroDeletar = UUID.fromString("bb651d19-c6f5-4531-9c05-91bf883b1201");
+        UUID idLivroDeletar = UUID.fromString("fd93d7c1-8134-4904-b96c-dbfa8f3593b7");
         repository.deleteById(idLivroDeletar);
     }
 
@@ -132,5 +131,34 @@ class LivroRepositoryTest {
 
         List<Livro> byTituloAndPreco = repository.findByTituloAndPreco(titulo, preco);
         byTituloAndPreco.forEach(System.out::println);
+    }
+
+    @Test
+    void listarLivroComQueryJPQL(){
+        var resultado = repository.listarTodosOrdenadoPorTituloAndPreco();
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void listarAutoresLivros(){
+        var resultado = repository.listarAutoresDosLivros();
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void listarGenerosAutoresBrasileiros(){
+        List<String> resultado = repository.listarGenerosAutoresBrasileiros();
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void listarPorGeneroQueryParamTest(){
+        var resultado = repository.findByGenero(GeneroLivro.CIENCIA, "dataPublicacao");
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void deletarPorGeneroTest(){
+        repository.deleteByGenero(GeneroLivro.CIENCIA);
     }
 }
