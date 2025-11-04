@@ -32,7 +32,7 @@ public class TransacaoService {
     public void executar(){
         // salva o autor
         Autor autor = new Autor();
-        autor.setNome("Eduardo");
+        autor.setNome("Leonardo");
         autor.setNacionalidade("Brasileiro");
         autor.setDataNascimento(LocalDate.of(2004, 4, 2));
 
